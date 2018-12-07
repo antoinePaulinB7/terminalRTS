@@ -3,13 +3,14 @@ const p = document.getElementById('prompt');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const gameObjects = [];
-const map = new Map(100,100);
+const x = 50;
+const y = 50;
+var map = new Map(x,y);
 const terminal = new Terminal();
 
 gameObjects.push(new GameObject(0,0));
 
-var x = 50;
-var y = 50;
+init();
 
 //EventListeners
 p.addEventListener("keydown", function(e) {
@@ -21,6 +22,8 @@ p.addEventListener("keydown", function(e) {
       terminal.send(p.value);
       p.value = "";
 
+      //don't forget to remove this init() call
+      init();
       update();
       draw();
     }
@@ -28,10 +31,54 @@ p.addEventListener("keydown", function(e) {
 
 //Main game loop
 
+//Main Init function
+function init(){
+  map = new Map(x,y);
+  //Generate the gold
+  let g = (x+y)/8-Math.floor(Math.random()*10);
+  for(let i = 0; i < g; i++){
+    let randomX = Math.floor(Math.random()*x);
+    let randomY = Math.floor(Math.random()*y);
+
+    map.addResource(randomX,randomY,gold);
+    map.addResource(x-randomX,y-randomY,gold);
+  }
+
+  //Generate the silver
+  let s = (x+y)/6-Math.floor(Math.random()*10);
+  for(let i = 0; i < s; i++){
+    let randomX = Math.floor(Math.random()*x);
+    let randomY = Math.floor(Math.random()*y);
+
+    map.addResource(randomX,randomY,silver);
+    map.addResource(x-randomX,y-randomY,silver);
+
+  }
+
+  //Generate the bronze
+  let b = (x+y)/6-Math.floor(Math.random()*10);
+  for(let i = 0; i < s; i++){
+    let randomX = Math.floor(Math.random()*x);
+    let randomY = Math.floor(Math.random()*y);
+
+    map.addResource(randomX,randomY,bronze);
+    map.addResource(x-randomX,y-randomY,bronze);
+
+  }
+
+  console.log('init');
+}
+
 //Main update function
 function update(){
   //Update all the gameObjects
   gameObjects.forEach(object => object.update());
+
+  let randomX = Math.floor(Math.random()*map.width);
+  let randomY = Math.floor(Math.random()*map.height);
+
+  map.addBuilding(randomX,randomY,baseA);
+  map.addBuilding(x-randomX,y-randomY,baseB);
 }
 
 //Canvas Functions

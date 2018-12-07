@@ -6,12 +6,12 @@ class GameObject {
   }
 
   update(){
-    x++;
-    y++;
+    this.x++;
+    this.y++;
   }
 
   draw(ctx){
-    ctx.fillRect(x,y,50,50);
+    ctx.fillRect(this.x,this.y,50,50);
   }
 
 }
