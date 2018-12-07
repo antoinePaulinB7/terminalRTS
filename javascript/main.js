@@ -3,6 +3,7 @@ const p = document.getElementById('prompt');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const gameObjects = [];
+const map = new Map(100,100);
 const terminal = new Terminal();
 
 gameObjects.push(new GameObject(0,0));
@@ -38,6 +39,9 @@ function draw(){
   //Make the canvas fit the space
   ctx.canvas.width  = window.innerWidth*0.65;
   ctx.canvas.height = window.innerHeight*0.65;
+
+  //Draw the Map
+  map.draw(ctx);
 
   //Draw all the gameObjects
   gameObjects.forEach(object => object.draw(ctx));

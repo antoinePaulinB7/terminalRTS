@@ -1,6 +1,5 @@
 body {
-  position : absolute;
-  background-color: darkGray;
+  background-color: lightGray;
   font-family: "Lucida Console", Monaco, monospace;
 }
 
@@ -12,10 +11,20 @@ button {
 }
 
 #middle {
+  position:absolute;
+  top:0px;
   height:65%;
 }
+
+#bottom {
+  position:absolute;
+  left:0px;
+  height:35%;
+}
+
 .canvas,
-.terminal {
+.terminal,
+.menu {
   height: inherit;
 }
 
@@ -30,6 +39,13 @@ button {
   height: 95%;
   word-wrap: normal;
   text-align: left;
+}
+
+.menu {
+  position: fixed;
+  bottom:0px;
+  width:100%;
+  background-color: darkGray;
 }
 
 #console,
