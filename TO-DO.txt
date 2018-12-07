@@ -1,0 +1,65 @@
+--- VICTORY CONDITIONS ---
+All opponents' units are destroyed
+and all opponents' can't make any more buildings.
+OR
+No more resources on the map. Player with most resources collected wins.
+
+--- UNITS ---
+All units can move around.
+All units have a set amount of HP.
+All units cost resources to be made.
+
+BUILDER - Low Price
+  -has little hp.
+  -moves medium.
+  -can build buildings.
+
+MINER - Medium Price
+  -has high hp.
+  -moves slow.
+  -can collect resources.
+
+SOLDIER - High Price
+  -has medium hp.
+  -moves fast.
+  -can attack other units.
+
+--- BUILDINGS ---
+All buildings have huge amounts of HP.
+Builds cost resources to be built.
+Only one building per tile.
+Buildings can't move.
+Buildings can make units.
+Buildings need resources to make stuff.
+
+BASE - High Price - High HP
+  -There can only be one base at a time.
+  -can make builders.
+  -acts as default MINE (or RESOURCE CENTER).
+
+MINE (or RESOURCE CENTER) - Low Price - Low HP
+  -Can be only one mine per 10 squarecells except for new base.
+  -can store resources. (resources need to be stored in order to be used)
+
+ARMORY - Medium Price - Medium HP
+  -can be anywhere.
+  -can make soldiers.
+
+WALLS - Low Price - High HP
+  -Units can't pass through cells with walls.
+
+--- RESOURCES ---
+Resource tiles are found on the map.
+Resources can't be traversed.
+Resources can't move.
+Resources eventually expire after number of collection.
+When resources expire, they disappear from the map.
+
+GOLD
+  -High resource value. (1 GOLD = 3 resource points)
+
+SILVER
+  -Medium resource value. (1 SILVER = 2 resource points)
+
+BRONZE
+  -Low resource value. (1 BRONZE = 1 resource points)

@@ -1,0 +1,49 @@
+body {
+  position : absolute;
+  background-color: darkGray;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family:inherit;
+}
+
+#middle {
+  height:65%;
+}
+.canvas,
+.terminal {
+  height: inherit;
+}
+
+.canvas {
+  position : fixed;
+  left:0px;
+  width: 65%;
+  background-color: skyblue;
+}
+
+#console{
+  height: 95%;
+  word-wrap: normal;
+  text-align: left;
+}
+
+#console,
+#prompt {
+  width: 100%;
+  background-color: inherit;
+  resize: none;
+  bottom:0px;
+  color: skyblue;
+}
+
+.terminal {
+  position : fixed;
+  right:0px;
+  width: 35%;
+  background-color: black;
+}
