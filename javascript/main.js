@@ -2,13 +2,15 @@
 const p = document.getElementById('prompt');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const gameObjects = [];
+//remember to set it back to const
+var gameObjects = [];
 const x = 50;
 const y = 50;
+//remember to set it back to const
 var map = new Map(x,y);
 const terminal = new Terminal();
 
-gameObjects.push(new GameObject(0,0));
+//gameObjects.push(new GameObject(0,0));
 
 init();
 
@@ -34,6 +36,7 @@ p.addEventListener("keydown", function(e) {
 //Main Init function
 function init(){
   map = new Map(x,y);
+  gameObjects = [];
   //Generate the gold
   let g = (x+y)/8-Math.floor(Math.random()*10);
   for(let i = 0; i < g; i++){
@@ -65,6 +68,8 @@ function init(){
     map.addResource(x-randomX,y-randomY,bronze);
 
   }
+
+  gameObjects.push(new Unit(25,25,'builder',teamA));
 
   console.log('init');
 }
