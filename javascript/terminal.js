@@ -36,19 +36,19 @@ class Terminal {
 
   select(selection){
     //find the object in gameObjects[]
-    
+
     //if it exists
     this.selection = selection;
     printLine('selected '+selection);
 
-    //if it doesn'//
-    this.selection = 'null';
-    error("cannot select '"+selection+"'");
+    //if it doesn't
+    // this.selection = 'null';
+    // error("cannot select '"+selection+"'");
   }
 
   move(x,y){
-    if(selection!=='null'){
-
+    if(this.selection!=='null'){
+      printLine('moving '+this.selection+'...');
     }
   }
 }
