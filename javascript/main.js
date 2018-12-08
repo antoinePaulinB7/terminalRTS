@@ -11,8 +11,8 @@ var map = new Map(x,y);
 const terminal = new Terminal();
 
 //gameObjects.push(new GameObject(0,0));
-
 init();
+draw();
 
 //EventListeners
 p.addEventListener("keydown", function(e) {
@@ -37,6 +37,8 @@ p.addEventListener("keydown", function(e) {
 function init(){
   map = new Map(x,y);
   gameObjects = [];
+  var routine = new Routine();
+  console.log(routine.state === RoutineState.Success);
   //Generate the gold
   let g = (x+y)/8-Math.floor(Math.random()*10);
   for(let i = 0; i < g; i++){
