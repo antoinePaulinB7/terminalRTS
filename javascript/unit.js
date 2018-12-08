@@ -66,3 +66,31 @@ class Unit extends GameObject {
   }
 
 }
+
+class MoveTo extends Routine {
+
+  constructor(destX,destY){
+    super();
+    this.destX = destX;
+    this.destY = destY;
+  }
+
+  reset(){
+    start();
+  }
+
+  act(unit,map){
+    if(!pathExists(unit,map)){
+      fail();
+      return;
+    }
+    if(!isUnitAtDestination(unit)){
+      moveUnit(unit);
+    }
+  }
+
+  moveUnit(unit){
+
+  }
+
+}
