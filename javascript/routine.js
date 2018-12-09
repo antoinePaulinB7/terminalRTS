@@ -4,11 +4,11 @@ Object.freeze(RoutineState);
 
 class Routine {
   constructor(){
-    this.state = null;
+    this.status = null;
   }
 
   start(){
-    this.state = RoutineState.Running;
+    this.status = RoutineState.Running;
   }
 
   reset(){
@@ -20,25 +20,29 @@ class Routine {
   }
 
   succeed(){
-    this.state = RoutineState.Success;
+    this.status = RoutineState.Success;
   }
 
   fail(){
-    this.state = RoutineState.Failure;
+    this.status = RoutineState.Failure;
   }
 
   isSuccess(){
-    return this.state === RoutineState.Success;
+    return this.status === RoutineState.Success;
   }
 
   isFailure(){
-    return this.state === RoutineState.Failure;
+    return this.status === RoutineState.Failure;
   }
 
   isRunning(){
-    return this.state === RoutineState.Running;
+    return this.status === RoutineState.Running;
   }
   get state(){
-    return this.state;
+    return this.status;
+  }
+
+  set state(s){
+    this.status = s;
   }
 }

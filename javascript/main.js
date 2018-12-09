@@ -92,7 +92,7 @@ function update(){
 function draw(){
   //Make the canvas fit the space
   ctx.canvas.width  = window.innerWidth*0.65;
-  ctx.canvas.height = window.innerHeight*0.65;
+  ctx.canvas.height = window.innerHeight*1;//0.65;
 
   //Draw the Map
   map.draw(ctx);
