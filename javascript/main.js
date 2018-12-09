@@ -14,6 +14,21 @@ const terminal = new Terminal();
 init();
 draw();
 
+//resizing the window
+function resize(){
+  //Make the canvas fit the space
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  canvas.width = width*0.65;
+  canvas.height = height;
+
+  //Make the console&prompt fit in the window
+  document.getElementById('console').style.height = height-30+"px";
+}
+
+window.onresize = resize;
+
 //EventListeners
 p.addEventListener("keydown", function(e) {
     if (!e) { var e = window.event; }//make sure to get the window event
@@ -30,8 +45,6 @@ p.addEventListener("keydown", function(e) {
       draw();
     }
 }, false);
-
-//Main game loop
 
 //Main Init function
 function init(){
@@ -90,13 +103,19 @@ function update(){
 
 //Canvas Functions
 function draw(){
-  //Make the canvas fit the space
-  ctx.canvas.width  = window.innerWidth*0.65;
-  ctx.canvas.height = window.innerHeight*1;//0.65;
-
+  resize();
   //Draw the Map
   map.draw(ctx);
 
   //Draw all the gameObjects
   gameObjects.forEach(object => object.draw(ctx));
 }
+
+
+//Main game loop
+function loop(){
+  update();
+  draw();
+}
+
+setInterval(loop,1000/10);
