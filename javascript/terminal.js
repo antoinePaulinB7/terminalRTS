@@ -3,10 +3,12 @@ const c = document.getElementById('console');
 class Terminal {
   constructor(){
     this.selection = 'null';
+    this.buffers = [];
   }
 
   send(input){
     //printLine(input);
+    this.buffers.push(input);
     let command = input.split(' ');
 
     while (command.length>0){
@@ -24,6 +26,14 @@ class Terminal {
         let x = command.shift();
         let y = command.shift();
         this.move(x,y);
+        break;
+        case 'clear':
+        clear();
+        break;
+        case 'list':
+        gameObjects.forEach(object => {
+          printLine(object);
+        })
         break;
         default :
         error("command '"+word+"' does not exist");
@@ -68,4 +78,10 @@ function printLine(input){
 
 function error(input){
   printLine('error: '+input);
+}
+
+function clear(){
+  var c = document.getElementById("console");
+  c.value = '';
+  c.scrollTop = c.scrollHeight;
 }

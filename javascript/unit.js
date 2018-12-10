@@ -65,6 +65,9 @@ class Unit extends GameObject {
 
   }
 
+  toString(){
+    return this.type+" : "+this.x+" "+this.y+" "+this.team;
+  }
 }
 
 class MoveTo extends Routine {

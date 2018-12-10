@@ -30,6 +30,7 @@ function resize(){
 window.onresize = resize;
 
 //EventListeners
+var iterator = 0;
 p.addEventListener("keydown", function(e) {
     if (!e) { var e = window.event; }//make sure to get the window event
 
@@ -38,11 +39,26 @@ p.addEventListener("keydown", function(e) {
       if(p.value !== "")
       terminal.send(p.value);
       p.value = "";
+      iterator = terminal.buffers.length;
 
       //don't forget to remove this init() call
       init();
       update();
       draw();
+    }
+
+    if (e.keyCode == 38){//pressing up
+      if(iterator>0){
+        iterator--;
+        p.value = terminal.buffers[iterator];
+      }
+    }
+
+    if (e.keyCode == 40){//pressing down
+      if(iterator<terminal.buffers.length-1){
+        iterator++;
+        p.value = terminal.buffers[iterator];
+      }
     }
 }, false);
 
@@ -84,10 +100,14 @@ function init(){
 
   }
 
+  //generate a builder
   gameObjects.push(new Unit(25,25,'builder',teamA));
 
   console.log('init');
+  printLine('initialization... done');
 }
+
+var counter = 0;
 
 //Main update function
 function update(){
@@ -99,6 +119,9 @@ function update(){
 
   map.addBuilding(randomX,randomY,baseA);
   map.addBuilding(x-randomX,y-randomY,baseB);
+
+  // counter++;
+  // printLine('counter : '+counter);
 }
 
 //Canvas Functions
