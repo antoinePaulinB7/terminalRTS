@@ -114,11 +114,11 @@ function update(){
   //Update all the gameObjects
   gameObjects.forEach(object => object.update());
 
-  let randomX = Math.floor(Math.random()*map.width);
-  let randomY = Math.floor(Math.random()*map.height);
-
-  map.addBuilding(randomX,randomY,baseA);
-  map.addBuilding(x-randomX,y-randomY,baseB);
+  // let randomX = Math.floor(Math.random()*map.width);
+  // let randomY = Math.floor(Math.random()*map.height);
+  //
+  // map.addBuilding(randomX,randomY,baseA);
+  // map.addBuilding(x-randomX,y-randomY,baseB);
 
   // counter++;
   // printLine('counter : '+counter);

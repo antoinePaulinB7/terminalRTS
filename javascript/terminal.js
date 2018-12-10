@@ -65,13 +65,11 @@ class Terminal {
 
 //Terminal Utils
 function print(input){
-  var c = document.getElementById("console");
   c.value += input;
   c.scrollTop = c.scrollHeight;
 }
 
 function printLine(input){
-  var c = document.getElementById("console");
   c.value += input+'\n';
   c.scrollTop = c.scrollHeight;
 }
@@ -81,7 +79,6 @@ function error(input){
 }
 
 function clear(){
-  var c = document.getElementById("console");
   c.value = '';
   c.scrollTop = c.scrollHeight;
 }
