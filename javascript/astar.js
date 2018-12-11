@@ -12,18 +12,22 @@ class Node {
 
 //------------------------------------------------------------------------------
 function astar(start,end,grid){
+
   //create the open list and closed list
-  var openList = [];
-  var closedList = [];
+  let openList = [];
+  let closedList = [];
 
   //put the node start in the open list
   start.g = 0;
 
   openList.push(start);
-  var nodesSearched = 0;
+  let nodesSearched = 0;
 
   while(openList.length>0){
-    if(nodesSearched>(grid.length*grid[0].length)/4) return null;
+    //limit the search for performance reasons
+    if(nodesSearched>(grid.length*grid[0].length)) {
+      return null;
+    }
     var currentNode = openList[0];
 
     //Find the node with lowest f (the currentNode)
@@ -51,7 +55,10 @@ function astar(start,end,grid){
 
     //if currentNode is goal, return the the closedList
     if(currentNode.x === end.x && currentNode.y === end.y){
-      return closedList;
+      openList = [];
+      var temp = closedList;
+      closedList = [];
+      return temp;
     }
 
     nodesSearched++;
@@ -68,7 +75,7 @@ function astar(start,end,grid){
         || neighbors[i].x>grid.length-1
         || neighbors[i].y<0
         || neighbors[i].y>grid[neighbors[i].x].length-1
-        || grid[neighbors[i].x][neighbors[i].y]!==0//change this depending on your own code
+        || grid[neighbors[i].x][neighbors[i].y]!==empty//change this depending on your own code
         ){
           continue;
         }

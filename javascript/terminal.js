@@ -2,12 +2,11 @@ const c = document.getElementById('console');
 
 class Terminal {
   constructor(){
-    this.selection = 'null';
+    this.selection = null;
     this.buffers = [];
   }
 
   send(input){
-    //printLine(input);
     this.buffers.push(input);
     let command = input.split(' ');
 
@@ -17,15 +16,29 @@ class Terminal {
       switch(word){
         case 'select':
         let selection = command.shift();
-        this.select(selection);
+        let x = parseInt(command.shift());
+        let y = parseInt(command.shift());
+        this.select(selection,x,y);
         break;
         case 'selection':
         printLine(this.selection+' is selected');
         break;
         case 'move':
-        let x = command.shift();
-        let y = command.shift();
-        this.move(x,y);
+        if(this.selection !== null){
+          let x = parseInt(command.shift());
+          let y = parseInt(command.shift());
+          this.selection.moveTo(x,y);
+        }else{
+          error('cannot move without selecting first');
+        }
+        break;
+        case 'build':
+        if(this.selection.type === 'builder'){
+          let building = command.shift();
+          this.selection.build(building);
+        }else{
+          error(this.selection+' is not a builder');
+        }
         break;
         case 'clear':
         clear();
@@ -44,12 +57,21 @@ class Terminal {
     }
   }
 
-  select(selection){
+  select(selection,x,y){
     //find the object in gameObjects[]
-
+    this.selection = null;
+    gameObjects.forEach(object => {
+      if(object.type === selection && object.x === x && object.y === y){
+        this.selection = object;
+      }
+    })
     //if it exists
-    this.selection = selection;
-    printLine('selected '+selection);
+
+    if(this.selection!==null){
+      printLine('selected '+this.selection);
+    }else{
+      error(selection+' '+x+' '+y+' does not exist');
+    }
 
     //if it doesn't
     // this.selection = 'null';

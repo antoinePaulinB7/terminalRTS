@@ -53,7 +53,6 @@ class Map {
       }
     }
 
-    console.log(dx+' '+dy);
     ctx.fillStyle = oldFillStyle;
   }
 

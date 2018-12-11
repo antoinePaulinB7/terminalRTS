@@ -7,7 +7,7 @@ var gameObjects = [];
 const x = 50;
 const y = 50;
 //remember to set it back to const
-var map = new Map(x,y);
+const map = new Map(x,y);
 const terminal = new Terminal();
 
 //gameObjects.push(new GameObject(0,0));
@@ -42,9 +42,9 @@ p.addEventListener("keydown", function(e) {
       iterator = terminal.buffers.length;
 
       //don't forget to remove this init() call
-      init();
-      update();
-      draw();
+      //init();
+      // update();
+      // draw();
     }
 
     if (e.keyCode == 38){//pressing up
@@ -64,8 +64,6 @@ p.addEventListener("keydown", function(e) {
 
 //Main Init function
 function init(){
-  map = new Map(x,y);
-  gameObjects = [];
   var routine = new Routine();
   console.log(routine.state === RoutineState.Success);
   //Generate the gold
@@ -101,9 +99,9 @@ function init(){
   }
 
   //generate a builder
-  gameObjects.push(new Unit(25,25,'builder',teamA));
-
-  console.log('init');
+  gameObjects.push(new Unit(25,25,'builder',A));
+  gameObjects.push(new Unit(15,25,'miner',A));
+  gameObjects.push(new Unit(25,15,'soldier',A));
   printLine('initialization... done');
 }
 
@@ -141,4 +139,4 @@ function loop(){
   draw();
 }
 
-setInterval(loop,1000/10);
+setInterval(loop,1000);

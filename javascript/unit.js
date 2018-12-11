@@ -1,17 +1,36 @@
-const teamA = 'blue';
-const teamB = 'green';
+const A ='blue';
+const B ='green';
 
 class Unit extends GameObject {
   constructor(x,y,type,team){
     super(x,y);
     this.type = type;
     this.team = team;
+    this.speed = 1;
     switch(type){
       case 'builder':
       this.speed = 2;
       this.hp = 1;
       this.build = function(building){
-        map.addBuilding(this.x,this.y,building);
+        let buildingToAdd = null;
+        switch(this.team){
+          case A:
+            if(building === 'base') buildingToAdd = baseA;
+            if(building === 'mine') buildingToAdd = mineA;
+            if(building === 'armory') buildingToAdd = armoryA;
+            break;
+          case B:
+          if(building === 'base') buildingToAdd = baseB;
+          if(building === 'mine') buildingToAdd = mineB;
+          if(building === 'armory') buildingToAdd = armoryB;
+            break;
+        }
+        if(buildingToAdd !== null){
+          map.addBuilding(this.x,this.y,buildingToAdd);
+          printLine(this.team+' '+building+' built');
+        }else{
+          error(building+' does not exist');
+        }
       };
       break;
       case 'miner':
@@ -30,12 +49,14 @@ class Unit extends GameObject {
       };
       break;
     }
-
-
+    this.routine = null;
   }
 
   update(){
-
+    if(this.routine !== null){
+      this.routine.act(this);
+      if(this.routine.isSuccess()||this.routine.isFailure())this.routine = null;
+    }
   }
 
   draw(ctx){
@@ -53,8 +74,6 @@ class Unit extends GameObject {
 
     ctx.fillStyle = oldFillStyle;
     ctx.strokeStyle = oldStrokeStyle;
-
-    console.log('drawing a '+this.type+' at '+this.x*dx+' '+this.y*dy);
   }
 
   move(x,y){
@@ -62,7 +81,12 @@ class Unit extends GameObject {
   }
 
   moveTo(x,y){
+    printLine(this+' moving to '+x+' '+y);
+    var start = new Node(this.x,this.y);
+    var end = new Node(x,y);
 
+    this.routine = new MoveTo(start,end,map.buildings);
+    this.routine.startR();
   }
 
   toString(){
@@ -72,28 +96,51 @@ class Unit extends GameObject {
 
 class MoveTo extends Routine {
 
-  constructor(destX,destY){
+  constructor(start,end,map){
     super();
-    this.destX = destX;
-    this.destY = destY;
+    this.start = start;
+    this.end = end;
+    this.map = map;
   }
 
-  reset(){
-    start();
+  startR(){
+    this.status = Routine.Running;
   }
 
-  act(unit,map){
-    if(!pathExists(unit,map)){
-      fail();
+  act(unit){
+    this.path = astar(this.start,this.end,this.map);
+    if(this.path === null || this.path === undefined){
+      this.fail();
+      printLine('fail');
       return;
     }
-    if(!isUnitAtDestination(unit)){
-      moveUnit(unit);
+
+    if(!(this.isUnitAtDestination(unit,this.end))){
+      this.moveUnit(unit);
+      //printLine('moving');
+    }else{
+      this.succeed();
+      printLine('success');
     }
   }
 
   moveUnit(unit){
+    //printLine('moving from moveUnit');
+    // printLine(unit);
+    // printLine(unit.speed);
+    for(let p = 0; p < unit.speed; p++){
+      if(this.path.length>1){
+        this.path.shift();
+      }
+    }
+    unit.x = this.path[0].x;
+    unit.y = this.path[0].y;
 
+    this.start = new Node(unit.x,unit.y);
+  }
+
+  isUnitAtDestination(unit, end){
+    return unit.x === end.x && unit.y === end.y;
   }
 
 }
