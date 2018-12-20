@@ -102,6 +102,8 @@ function init(){
   gameObjects.push(new Unit(25,25,'builder',A));
   gameObjects.push(new Unit(15,25,'miner',A));
   gameObjects.push(new Unit(25,15,'soldier',A));
+
+  gameObjects.push(new Building(10,10,'armory',A));
   printLine('initialization... done');
 }
 

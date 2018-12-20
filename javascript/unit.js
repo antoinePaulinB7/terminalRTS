@@ -26,7 +26,7 @@ class Unit extends GameObject {
             break;
         }
         if(buildingToAdd !== null){
-          map.addBuilding(this.x,this.y,buildingToAdd);
+          gameObjects.push(new Building(this.x,this.y,building,this.team));
           printLine(this.team+' '+building+' built');
         }else{
           error(building+' does not exist');

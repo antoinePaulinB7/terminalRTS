@@ -40,6 +40,18 @@ class Terminal {
           error(this.selection+' is not a builder');
         }
         break;
+        case 'make':
+        if(this.selection.type === 'base'
+        || this.selection.type === 'mine'
+        || this.selection.type === 'armory'){
+          this.selection.taskList.push(new Make(this.selection.x,
+            this.selection.y,
+            this.selection.unitType,
+            this.selection.team));
+        }else{
+          error(this.selection+' is not a building');
+        }
+        break;
         case 'clear':
         clear();
         break;
