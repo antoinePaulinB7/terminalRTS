@@ -1,3 +1,7 @@
+var baseMasterID = 0;
+var mineMasterID = 0;
+var armoryMasterID = 0;
+
 class Building extends GameObject {
   constructor(x,y,type,team){
     super(x,y);
@@ -10,16 +14,16 @@ class Building extends GameObject {
       case 'base':
       this.resources = 0;
       this.unitType = 'builder';
-
+      this.id = baseMasterID++;
       break;
       case 'mine':
       this.resources = 0;
       this.unitType = 'miner';
-
+      this.id = mineMasterID++;
       break;
       case 'armory':
       this.unitType = 'soldier';
-
+      this.id = armoryMasterID++;
       break;
     }
 
@@ -51,7 +55,7 @@ class Building extends GameObject {
   }
 
   toString(){
-    return this.type+" : "+this.x+" "+this.y+" "+this.team;
+    return this.type+" "+this.id+" : "+this.x+" "+this.y+" "+this.team;
   }
 
 }

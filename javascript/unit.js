@@ -1,6 +1,11 @@
 const A ='blue';
 const B ='green';
 
+var builderMasterID = 0;
+var minerMasterID = 0;
+var soldierMasterID = 0;
+
+
 class Unit extends GameObject {
   constructor(x,y,type,team){
     super(x,y);
@@ -11,6 +16,7 @@ class Unit extends GameObject {
       case 'builder':
       this.speed = 2;
       this.hp = 1;
+      this.id = builderMasterID++;
       this.build = function(building){
         let buildingToAdd = null;
         switch(this.team){
@@ -36,6 +42,7 @@ class Unit extends GameObject {
       case 'miner':
       this.speed = 1;
       this.hp = 3;
+      this.id = minerMasterID++;
       this.mine = function(x,y){
 
       };
@@ -44,6 +51,7 @@ class Unit extends GameObject {
       case 'soldier':
       this.speed = 3;
       this.hp = 2;
+      this.id = soldierMasterID++;
       this.attack = function(x,y){
 
       };
@@ -90,7 +98,7 @@ class Unit extends GameObject {
   }
 
   toString(){
-    return this.type+" : "+this.x+" "+this.y+" "+this.team;
+    return this.type+" "+this.id+" : "+this.x+" "+this.y+" "+this.team;
   }
 }
 

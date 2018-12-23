@@ -17,8 +17,12 @@ class Terminal {
         case 'select':
         let selection = command.shift();
         let x = parseInt(command.shift());
-        let y = parseInt(command.shift());
-        this.select(selection,x,y);
+        if(command.length === 0){
+          this.selectById(selection,x);
+        }else{
+          let y = parseInt(command.shift());
+          this.select(selection,x,y);
+        }
         break;
         case 'selection':
         printLine(this.selection+' is selected');
@@ -67,6 +71,27 @@ class Terminal {
       }
 
     }
+  }
+
+  selectById(selection,id){
+    //find the object in gameObjects[]
+    this.selection = null;
+    gameObjects.forEach(object => {
+      if(object.type === selection && object.id === id){
+        this.selection = object;
+      }
+    })
+    //if it exists
+
+    if(this.selection!==null){
+      printLine('selected '+this.selection);
+    }else{
+      error(selection+' '+id+' does not exist');
+    }
+
+    //if it doesn't
+    // this.selection = 'null';
+    // error("cannot select '"+selection+"'");
   }
 
   select(selection,x,y){
